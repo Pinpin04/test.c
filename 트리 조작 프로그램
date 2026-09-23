@@ -1,0 +1,675 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_SIZE 100
+#define MAX_PATH 500
+#define MAX_INPUT 600
+
+typedef struct TreeNode {
+    char data;
+    struct TreeNode *left;
+    struct TreeNode *right;
+} TreeNode;
+
+typedef struct {
+    TreeNode *root;
+    int size;
+    int count;
+} BTree;
+
+BTree *create_btree(int size)
+{
+    BTree *tree = (BTree *)malloc(sizeof(BTree));
+
+    if (tree == NULL) {
+        printf("Memory allocation error.\n");
+        exit(1);
+    }
+
+    tree->root = NULL;
+    tree->size = size;
+    tree->count = 0;
+
+    return tree;
+}
+
+TreeNode *create_node(char value)
+{
+    TreeNode *node = (TreeNode *)malloc(sizeof(TreeNode));
+
+    if (node == NULL) {
+        printf("Memory allocation error.\n");
+        exit(1);
+    }
+
+    node->data = value;
+    node->left = NULL;
+    node->right = NULL;
+
+    return node;
+}
+
+TreeNode *search_path(TreeNode *root, const char *path)
+{
+    char tokens[MAX_PATH];
+    int count = 0;
+
+    if (root == NULL || path == NULL)
+        return NULL;
+
+    if (path[0] != '/')
+        return NULL;
+
+    for (int i = 1; path[i] != '\0'; i++) {
+        if (path[i] == '/')
+            continue;
+
+        if (!isupper((unsigned char)path[i]))
+            return NULL;
+
+        tokens[count++] = path[i];
+    }
+
+    if (count == 0)
+        return NULL;
+
+    if (root->data != tokens[0])
+        return NULL;
+
+    TreeNode *search_recursive(TreeNode *node, int index)
+    {
+        TreeNode *result;
+
+        if (node == NULL)
+            return NULL;
+
+        if (index == count - 1)
+            return node;
+
+        if (node->left != NULL &&
+            node->left->data == tokens[index + 1]) {
+
+            result = search_recursive(node->left, index + 1);
+
+            if (result != NULL)
+                return result;
+        }
+
+        if (node->right != NULL &&
+            node->right->data == tokens[index + 1]) {
+
+            result = search_recursive(node->right, index + 1);
+
+            if (result != NULL)
+                return result;
+        }
+
+        return NULL;
+    }
+
+    return search_recursive(root, 0);
+}
+
+int find_parent(TreeNode *root,
+                TreeNode *target,
+                TreeNode **parent,
+                char *position)
+{
+    if (root == NULL)
+        return 0;
+
+    if (root->left == target) {
+        *parent = root;
+        *position = 'L';
+        return 1;
+    }
+
+    if (root->right == target) {
+        *parent = root;
+        *position = 'R';
+        return 1;
+    }
+
+    if (find_parent(root->left, target, parent, position))
+        return 1;
+
+    if (find_parent(root->right, target, parent, position))
+        return 1;
+
+    return 0;
+}
+
+int insert_root(BTree *tree, char value)
+{
+    if (tree == NULL)
+        return 0;
+
+    if (tree->root != NULL) {
+        printf("Error: Root already exists.\n");
+        return 0;
+    }
+
+    if (tree->count >= tree->size) {
+        printf("Error: Tree is full.\n");
+        return 0;
+    }
+
+    tree->root = create_node(value);
+    tree->count++;
+
+    printf("Root %c inserted.\n", value);
+
+    return 1;
+}
+
+int insert_child(BTree *tree,
+                 TreeNode *parent,
+                 char child,
+                 char value)
+{
+    if (tree == NULL || parent == NULL)
+        return 0;
+
+    if (tree->count >= tree->size) {
+        printf("Error: Tree is full.\n");
+        return 0;
+    }
+
+    if (child != 'L' && child != 'R') {
+        printf("Error: Child must be L or R.\n");
+        return 0;
+    }
+
+    if (parent->left != NULL || parent->right != NULL) {
+        printf("Error: Parent is not a leaf node.\n");
+        return 0;
+    }
+
+    if (child == 'L')
+        parent->left = create_node(value);
+    else
+        parent->right = create_node(value);
+
+    tree->count++;
+
+    return 1;
+}
+
+int delete_node(BTree *tree, TreeNode *target)
+{
+    TreeNode *parent;
+    char position;
+
+    if (tree == NULL || target == NULL)
+        return 0;
+
+    if (target->left != NULL || target->right != NULL) {
+        printf("Error: Node is not a leaf.\n");
+        return 0;
+    }
+
+    if (target == tree->root) {
+        free(target);
+        tree->root = NULL;
+        tree->count--;
+
+        printf("Root deleted.\n");
+
+        return 1;
+    }
+
+    parent = NULL;
+    position = '\0';
+
+    if (!find_parent(tree->root,
+                     target,
+                     &parent,
+                     &position)) {
+
+        printf("Error: Parent not found.\n");
+        return 0;
+    }
+
+    if (position == 'L')
+        parent->left = NULL;
+    else
+        parent->right = NULL;
+
+    free(target);
+    tree->count--;
+
+    return 1;
+}
+
+int update_value(BTree *tree,
+                 TreeNode *target,
+                 char value)
+{
+    TreeNode *parent;
+
+    if (tree == NULL || target == NULL)
+        return 0;
+
+    parent = NULL;
+
+    if (target != tree->root) {
+        char position;
+
+        if (!find_parent(tree->root,
+                         target,
+                         &parent,
+                         &position)) {
+
+            printf("Error: Parent not found.\n");
+            return 0;
+        }
+
+        if (position == 'L') {
+            if (parent->right != NULL &&
+                parent->right->data == value) {
+
+                printf("Error: Duplicate sibling data.\n");
+                return 0;
+            }
+        }
+        else {
+            if (parent->left != NULL &&
+                parent->left->data == value) {
+
+                printf("Error: Duplicate sibling data.\n");
+                return 0;
+            }
+        }
+    }
+
+    target->data = value;
+
+    return 1;
+}
+
+void read_child(TreeNode *parent)
+{
+    if (parent == NULL)
+        return;
+
+    if (parent->left == NULL &&
+        parent->right == NULL) {
+
+        printf("No children.\n");
+        return;
+    }
+
+    if (parent->left != NULL)
+        printf("%c(L)", parent->left->data);
+
+    if (parent->left != NULL &&
+        parent->right != NULL)
+        printf(", ");
+
+    if (parent->right != NULL)
+        printf("%c(R)", parent->right->data);
+
+    printf("\n");
+}
+
+void print_tree_recursive(TreeNode *node, int depth)
+{
+    if (node == NULL)
+        return;
+
+    print_tree_recursive(node->right, depth + 1);
+
+    for (int i = 0; i < depth; i++)
+        printf("    ");
+
+    if (depth > 0)
+        printf("+---");
+
+    printf("%c\n", node->data);
+
+    print_tree_recursive(node->left, depth + 1);
+}
+
+void print_btree(BTree *tree)
+{
+    if (tree == NULL || tree->root == NULL) {
+        printf("Tree is empty.\n");
+        return;
+    }
+
+    print_tree_recursive(tree->root, 0);
+}
+
+void destroy_node(TreeNode *node)
+{
+    if (node == NULL)
+        return;
+
+    destroy_node(node->left);
+    destroy_node(node->right);
+
+    free(node);
+}
+
+void destroy_btree(BTree *tree)
+{
+    if (tree == NULL)
+        return;
+
+    destroy_node(tree->root);
+    free(tree);
+}
+
+void trim(char *str)
+{
+    int start = 0;
+    int end = strlen(str) - 1;
+
+    while (isspace((unsigned char)str[start]))
+        start++;
+
+    while (end >= start &&
+           isspace((unsigned char)str[end]))
+        end--;
+
+    memmove(str, str + start, end - start + 1);
+    str[end - start + 1] = '\0';
+}
+
+int valid_data(const char *str)
+{
+    return str != NULL &&
+           strlen(str) == 1 &&
+           isupper((unsigned char)str[0]);
+}
+
+void command_insert(BTree *tree,
+                    char *parent_path,
+                    char *child,
+                    char *data)
+{
+    if (strcmp(parent_path, "/") == 0) {
+
+        if (!valid_data(data)) {
+            printf("Error: Invalid data.\n");
+            return;
+        }
+
+        insert_root(tree, data[0]);
+        return;
+    }
+
+    TreeNode *parent =
+        search_path(tree->root, parent_path);
+
+    if (parent == NULL) {
+        printf("Error: Parent node not found.\n");
+        return;
+    }
+
+    if (strlen(child) != 1 ||
+        (child[0] != 'L' &&
+         child[0] != 'l' &&
+         child[0] != 'R' &&
+         child[0] != 'r')) {
+
+        printf("Error: Child must be L or R.\n");
+        return;
+    }
+
+    if (!valid_data(data)) {
+        printf("Error: Invalid data.\n");
+        return;
+    }
+
+    char position =
+        toupper((unsigned char)child[0]);
+
+    if (parent->left != NULL ||
+        parent->right != NULL) {
+
+        printf("Error: Parent is not a leaf node.\n");
+        return;
+    }
+
+    if (position == 'L' &&
+        parent->right != NULL &&
+        parent->right->data == data[0]) {
+
+        printf("Error: Duplicate sibling data.\n");
+        return;
+    }
+
+    if (position == 'R' &&
+        parent->left != NULL &&
+        parent->left->data == data[0]) {
+
+        printf("Error: Duplicate sibling data.\n");
+        return;
+    }
+
+    if (insert_child(tree,
+                     parent,
+                     position,
+                     data[0])) {
+
+        printf("Node %c inserted.\n", data[0]);
+    }
+}
+
+void command_delete(BTree *tree,
+                    char *path)
+{
+    TreeNode *target =
+        search_path(tree->root, path);
+
+    if (target == NULL) {
+        printf("Error: Node not found.\n");
+        return;
+    }
+
+    delete_node(tree, target);
+}
+
+void command_update(BTree *tree,
+                    char *path,
+                    char *data)
+{
+    if (!valid_data(data)) {
+        printf("Error: Invalid data.\n");
+        return;
+    }
+
+    TreeNode *target =
+        search_path(tree->root, path);
+
+    if (target == NULL) {
+        printf("Error: Node not found.\n");
+        return;
+    }
+
+    if (update_value(tree,
+                     target,
+                     data[0])) {
+
+        printf("Node updated to %c.\n", data[0]);
+    }
+}
+
+void command_read(BTree *tree,
+                  char *path)
+{
+    TreeNode *target =
+        search_path(tree->root, path);
+
+    if (target == NULL) {
+        printf("Error: Node not found.\n");
+        return;
+    }
+
+    read_child(target);
+}
+
+int command_type(char *command)
+{
+    if (command == NULL)
+        return 0;
+
+    if (strcasecmp(command, "Insert") == 0 ||
+        strcasecmp(command, "I") == 0)
+        return 1;
+
+    if (strcasecmp(command, "Delete") == 0 ||
+        strcasecmp(command, "D") == 0)
+        return 2;
+
+    if (strcasecmp(command, "Update") == 0 ||
+        strcasecmp(command, "U") == 0)
+        return 3;
+
+    if (strcasecmp(command, "Read") == 0 ||
+        strcasecmp(command, "R") == 0)
+        return 4;
+
+    if (strcasecmp(command, "Print") == 0 ||
+        strcasecmp(command, "P") == 0)
+        return 5;
+
+    return 0;
+}
+
+int main(void)
+{
+    BTree *tree = create_btree(MAX_SIZE);
+
+    char input[MAX_INPUT];
+
+    printf("Binary Tree Program\n");
+
+    while (1) {
+
+        printf("> ");
+
+        if (fgets(input,
+                  sizeof(input),
+                  stdin) == NULL) {
+            break;
+        }
+
+        input[strcspn(input, "\n")] = '\0';
+
+        trim(input);
+
+        if (strlen(input) == 0)
+            continue;
+
+        if (strcasecmp(input, "Quit") == 0 ||
+            strcasecmp(input, "Q") == 0 ||
+            strcasecmp(input, "Exit") == 0) {
+
+            break;
+        }
+
+        char *command = strtok(input, " \t");
+
+        if (command == NULL)
+            continue;
+
+        int type = command_type(command);
+
+        if (type == 1) {
+
+            char *arg1 = strtok(NULL, " \t");
+            char *arg2 = strtok(NULL, " \t");
+            char *arg3 = strtok(NULL, " \t");
+            char *extra = strtok(NULL, " \t");
+
+            if (arg1 != NULL &&
+                strcmp(arg1, "/") == 0 &&
+                arg2 != NULL &&
+                arg3 == NULL &&
+                extra == NULL) {
+
+                command_insert(tree,
+                               arg1,
+                               NULL,
+                               arg2);
+            }
+            else if (arg1 != NULL &&
+                     arg2 != NULL &&
+                     arg3 != NULL &&
+                     extra == NULL) {
+
+                command_insert(tree,
+                               arg1,
+                               arg2,
+                               arg3);
+            }
+            else {
+                printf("Error: Invalid Insert command.\n");
+            }
+        }
+        else if (type == 2) {
+
+            char *arg1 = strtok(NULL, " \t");
+            char *extra = strtok(NULL, " \t");
+
+            if (arg1 == NULL || extra != NULL) {
+                printf("Error: Invalid Delete command.\n");
+                continue;
+            }
+
+            command_delete(tree, arg1);
+        }
+        else if (type == 3) {
+
+            char *arg1 = strtok(NULL, " \t");
+            char *arg2 = strtok(NULL, " \t");
+            char *extra = strtok(NULL, " \t");
+
+            if (arg1 == NULL ||
+                arg2 == NULL ||
+                extra != NULL) {
+
+                printf("Error: Invalid Update command.\n");
+                continue;
+            }
+
+            command_update(tree,
+                           arg1,
+                           arg2);
+        }
+        else if (type == 4) {
+
+            char *arg1 = strtok(NULL, " \t");
+            char *extra = strtok(NULL, " \t");
+
+            if (arg1 == NULL || extra != NULL) {
+                printf("Error: Invalid Read command.\n");
+                continue;
+            }
+
+            command_read(tree, arg1);
+        }
+        else if (type == 5) {
+
+            char *extra = strtok(NULL, " \t");
+
+            if (extra != NULL) {
+                printf("Error: Invalid Print command.\n");
+                continue;
+            }
+
+            print_btree(tree);
+        }
+        else {
+            printf("Error: Unknown command.\n");
+        }
+    }
+
+    destroy_btree(tree);
+
+    return 0;
+}
