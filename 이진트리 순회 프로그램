@@ -1,0 +1,326 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 1000
+
+typedef struct Node {
+    char data;
+    struct Node* left;
+    struct Node* right;
+} Node;
+
+typedef struct {
+    Node* data[MAX];
+    int top;
+} Stack;
+
+void initStack(Stack* s)
+{
+    s->top = -1;
+}
+
+int isEmpty(Stack* s)
+{
+    return s->top == -1;
+}
+
+void push(Stack* s, Node* node)
+{
+    if (s->top < MAX - 1)
+        s->data[++s->top] = node;
+}
+
+Node* pop(Stack* s)
+{
+    if (isEmpty(s))
+        return NULL;
+
+    return s->data[s->top--];
+}
+
+Node* createNode(char data)
+{
+    Node* newNode = (Node*)malloc(sizeof(Node));
+
+    if (newNode == NULL)
+        return NULL;
+
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    return newNode;
+}
+
+/* 괄호 표기법으로부터 이진트리 생성 */
+Node* buildTree(char* str)
+{
+    Node* root = NULL;
+    Node* stack[MAX];
+    int top = -1;
+    int i = 0;
+    int expectNode = 1;
+
+    while (str[i] != '\0')
+    {
+        char ch = str[i];
+
+        if (ch == ' ')
+        {
+            i++;
+            continue;
+        }
+
+        if (ch == '(')
+        {
+            if (root == NULL)
+            {
+                free(root);
+                return NULL;
+            }
+
+            stack[++top] = root;
+            expectNode = 1;
+        }
+        else if (ch == ',')
+        {
+            expectNode = 1;
+        }
+        else if (ch == ')')
+        {
+            if (top < 0)
+                return NULL;
+
+            top--;
+        }
+        else
+        {
+            Node* newNode;
+
+            if (!((ch >= 'A' && ch <= 'Z') ||
+                  (ch >= 'a' && ch <= 'z') ||
+                  (ch >= '0' && ch <= '9')))
+            {
+                return NULL;
+            }
+
+            newNode = createNode(ch);
+
+            if (newNode == NULL)
+                return NULL;
+
+            if (root == NULL)
+            {
+                root = newNode;
+            }
+            else
+            {
+                if (top < 0)
+                    return NULL;
+
+                if (stack[top]->left == NULL)
+                    stack[top]->left = newNode;
+                else if (stack[top]->right == NULL)
+                    stack[top]->right = newNode;
+                else
+                    return NULL;
+            }
+
+            if (i + 1 < (int)strlen(str) && str[i + 1] == '(')
+            {
+                stack[++top] = newNode;
+            }
+        }
+
+        i++;
+    }
+
+    if (top != -1)
+        return NULL;
+
+    return root;
+}
+
+/* 전위 순회 */
+void preorder(Node* root)
+{
+    Stack s;
+    Node* current;
+
+    initStack(&s);
+
+    if (root == NULL)
+        return;
+
+    push(&s, root);
+
+    while (!isEmpty(&s))
+    {
+        current = pop(&s);
+
+        printf("%c ", current->data);
+
+        if (current->right != NULL)
+            push(&s, current->right);
+
+        if (current->left != NULL)
+            push(&s, current->left);
+    }
+}
+
+/* 중위 순회 */
+void inorder(Node* root)
+{
+    Stack s;
+    Node* current = root;
+
+    initStack(&s);
+
+    while (current != NULL || !isEmpty(&s))
+    {
+        while (current != NULL)
+        {
+            push(&s, current);
+            current = current->left;
+        }
+
+        current = pop(&s);
+
+        printf("%c ", current->data);
+
+        current = current->right;
+    }
+}
+
+/* 후위 순회 */
+void postorder(Node* root)
+{
+    Stack s1, s2;
+    Node* current;
+
+    initStack(&s1);
+    initStack(&s2);
+
+    if (root == NULL)
+        return;
+
+    push(&s1, root);
+
+    while (!isEmpty(&s1))
+    {
+        current = pop(&s1);
+        push(&s2, current);
+
+        if (current->left != NULL)
+            push(&s1, current->left);
+
+        if (current->right != NULL)
+            push(&s1, current->right);
+    }
+
+    while (!isEmpty(&s2))
+    {
+        current = pop(&s2);
+        printf("%c ", current->data);
+    }
+}
+
+/* 트리 구조 출력 */
+void printTree(Node* root, int level)
+{
+    if (root == NULL)
+        return;
+
+    for (int i = 0; i < level; i++)
+        printf("    ");
+
+    printf("%c\n", root->data);
+
+    if (root->left != NULL)
+    {
+        for (int i = 0; i < level; i++)
+            printf("    ");
+
+        printf("L-> ");
+        printTree(root->left, level + 1);
+    }
+
+    if (root->right != NULL)
+    {
+        for (int i = 0; i < level; i++)
+            printf("    ");
+
+        printf("R-> ");
+        printTree(root->right, level + 1);
+    }
+}
+
+/* 메모리 해제 */
+void freeTree(Node* root)
+{
+    Node* stack[MAX];
+    int top = -1;
+    Node* current;
+
+    if (root == NULL)
+        return;
+
+    stack[++top] = root;
+
+    while (top >= 0)
+    {
+        current = stack[top--];
+
+        if (current->left != NULL)
+            stack[++top] = current->left;
+
+        if (current->right != NULL)
+            stack[++top] = current->right;
+
+        free(current);
+    }
+}
+
+int main()
+{
+    char input[MAX];
+    Node* root;
+
+    printf("괄호 표기법으로 이진트리를 입력하세요.\n");
+    printf("예: A(B(D,E),C(F,G))\n");
+    printf("입력: ");
+
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = '\0';
+
+    root = buildTree(input);
+
+    if (root == NULL)
+    {
+        printf("\n잘못된 이진트리 입력입니다.\n");
+        return 1;
+    }
+
+    printf("\n===== 입력된 이진트리 =====\n");
+    printTree(root, 0);
+
+    printf("\n===== 전위 순회 =====\n");
+    printf("Preorder : ");
+    preorder(root);
+    printf("\n");
+
+    printf("\n===== 중위 순회 =====\n");
+    printf("Inorder  : ");
+    inorder(root);
+    printf("\n");
+
+    printf("\n===== 후위 순회 =====\n");
+    printf("Postorder: ");
+    postorder(root);
+    printf("\n");
+
+    freeTree(root);
+
+    return 0;
+}
