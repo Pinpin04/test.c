@@ -1,0 +1,160 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TRIES 100
+#define M 50
+#define MAXV 1000
+
+typedef struct Node { int data, h; struct Node *left, *right; } Node;
+
+static long bst_cmp = 0, avl_cmp = 0;
+
+Node *new_node(int v){
+    Node *n = malloc(sizeof(Node));
+    n->data = v; n->h = 1; n->left = n->right = NULL;
+    return n;
+}
+
+/* ---------- BST ---------- */
+Node *bst_insert(Node *root, int v, int *inserted){
+    *inserted = 0;
+    if(!root){ *inserted = 1; return new_node(v); }
+    Node *cur = root;
+    while(1){
+        bst_cmp++;
+        if(v == cur->data) return root;          /* 중복 */
+        if(v < cur->data){
+            if(!cur->left){ cur->left = new_node(v); *inserted = 1; return root; }
+            cur = cur->left;
+        } else {
+            if(!cur->right){ cur->right = new_node(v); *inserted = 1; return root; }
+            cur = cur->right;
+        }
+    }
+}
+
+/* ---------- AVL (균형 계산은 비교 횟수에 포함하지 않음) ---------- */
+int H(Node *n){ return n ? n->h : 0; }
+void upd(Node *n){ int l = H(n->left), r = H(n->right); n->h = 1 + (l > r ? l : r); }
+int bf(Node *n){ return H(n->left) - H(n->right); }
+
+Node *rot_right(Node *y){ Node *x = y->left; y->left = x->right; x->right = y; upd(y); upd(x); return x; }
+Node *rot_left(Node *x){ Node *y = x->right; x->right = y->left; y->left = x; upd(x); upd(y); return y; }
+
+Node *avl_insert(Node *n, int v, int *inserted){
+    if(!n){ *inserted = 1; return new_node(v); }
+    avl_cmp++;
+    if(v == n->data){ *inserted = 0; return n; }
+    if(v < n->data) n->left = avl_insert(n->left, v, inserted);
+    else            n->right = avl_insert(n->right, v, inserted);
+    if(!*inserted) return n;
+    upd(n);
+    int b = bf(n);
+    if(b > 1){
+        if(bf(n->left) >= 0) return rot_right(n);                 /* LL */
+        n->left = rot_left(n->left); return rot_right(n);         /* LR */
+    }
+    if(b < -1){
+        if(bf(n->right) <= 0) return rot_left(n);                 /* RR */
+        n->right = rot_right(n->right); return rot_left(n);       /* RL */
+    }
+    return n;
+}
+
+int tree_search(Node *root, int key, int *found){
+    int c = 0;
+    Node *cur = root;
+    while(cur){
+        c++;
+        if(key == cur->data){ *found = 1; return c; }
+        cur = key < cur->data ? cur->left : cur->right;
+    }
+    *found = 0;
+    return c;
+}
+
+int height(Node *n){
+    if(!n) return 0;
+    int l = height(n->left), r = height(n->right);
+    return 1 + (l > r ? l : r);
+}
+int check_avl(Node *n){   /* 검증용: 균형 및 저장 높이 */
+    if(!n) return 1;
+    int d = height(n->left) - height(n->right);
+    return d >= -1 && d <= 1 && check_avl(n->left) && check_avl(n->right);
+}
+void free_tree(Node *n){ if(n){ free_tree(n->left); free_tree(n->right); free(n);} }
+
+int seq_search(int *a, int n, int key, int *found){
+    int c = 0;
+    for(int i = 0; i < n; i++){ c++; if(a[i] == key){ *found = 1; return c; } }
+    *found = 0;
+    return c;
+}
+
+int main(int argc, char **argv){
+    unsigned seed = argc > 1 ? (unsigned)atoi(argv[1]) : 2026;
+    srand(seed);
+    printf("Seed : %u\n", seed);
+
+    int arr[TRIES], len = 0, gen[TRIES];
+    long arr_cmp = 0;
+    Node *bst = NULL, *avl = NULL;
+    int dup = 0;
+
+    for(int i = 0; i < TRIES; i++){
+        int v = rand() % (MAXV + 1);
+        gen[i] = v;
+        int found;
+        /* 배열: 중복 확인 (순차 탐색), 비교 횟수 누적 */
+        arr_cmp += seq_search(arr, len, v, &found);
+        if(!found) arr[len++] = v; else dup++;
+        int i1, i2;
+        bst = bst_insert(bst, v, &i1);
+        avl = avl_insert(avl, v, &i2);
+        if(i1 != !found || i2 != !found){ printf("ERROR: inconsistent\n"); return 1; }
+    }
+
+    printf("\n=== Generated %d integers ===\n", TRIES);
+    for(int i = 0; i < TRIES; i++) printf("%4d%s", gen[i], (i%10==9)?"\n":" ");
+    printf("\nStored values (distinct) : %d\n", len);
+    printf("Duplicates not inserted  : %d\n", dup);
+
+    printf("\nConstruction\n");
+    printf("Array comparisons : %ld\n", arr_cmp);
+    printf("BST comparisons   : %ld\n", bst_cmp);
+    printf("AVL comparisons   : %ld\n", avl_cmp);
+
+    printf("\nStructure\n");
+    printf("Array length : %d\n", len);
+    printf("BST height   : %d\n", height(bst));
+    printf("AVL height   : %d\n", height(avl));
+    printf("AVL balanced check : %s\n", check_avl(avl) ? "OK" : "FAIL");
+
+    int keys[M];
+    for(int i = 0; i < M; i++) keys[i] = rand() % (MAXV + 1);
+    printf("\n=== Search keys (%d) ===\n", M);
+    for(int i = 0; i < M; i++) printf("%4d%s", keys[i], (i%10==9)?"\n":" ");
+
+    long st = 0, bt = 0, at = 0; int ok = 0;
+    for(int i = 0; i < M; i++){
+        int f1, f2, f3;
+        int c1 = seq_search(arr, len, keys[i], &f1);
+        int c2 = tree_search(bst, keys[i], &f2);
+        int c3 = tree_search(avl, keys[i], &f3);
+        st += c1; bt += c2; at += c3; if(f1) ok++;
+        printf("\nSearch Key : %d\n\nSequential Search\nResult      : %s\nComparisons : %d\n",
+               keys[i], f1?"Found":"Not Found", c1);
+        printf("\nBST Search\nResult      : %s\nComparisons : %d\n", f2?"Found":"Not Found", c2);
+        printf("\nAVL Search\nResult      : %s\nComparisons : %d\n", f3?"Found":"Not Found", c3);
+    }
+    printf("\nSearches : %d (found %d, not found %d)\n", M, ok, M - ok);
+    printf("\nSequential Search\nTotal comparisons   : %ld\nAverage comparisons : %.2f\n", st, (double)st/M);
+    printf("\nBST Search\nTotal comparisons   : %ld\nAverage comparisons : %.2f\n", bt, (double)bt/M);
+    printf("\nAVL Search\nTotal comparisons   : %ld\nAverage comparisons : %.2f\n", at, (double)at/M);
+    printf("\nConstruction + search total\nArray : %ld\nBST   : %ld\nAVL   : %ld\n",
+           arr_cmp + st, bst_cmp + bt, avl_cmp + at);
+
+    free_tree(bst); free_tree(avl);
+    return 0;
+}
