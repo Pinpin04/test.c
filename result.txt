@@ -1,0 +1,435 @@
+=== Generated 100 distinct integers ===
+ 965  551   38  317  989   16  104  315   83   25
+  30  918  412  297  451  430   84  675  516  495
+ 638   43  733  796  665  906  577  893  990  761
+ 895  645    2  933  962  991  639   65  996  723
+ 781  640  192   13  313   97  145  829  282  474
+ 562   15  960  226  921  536  809  910  987  703
+ 244  325  205  979  655  961  377  742  690  707
+ 624  177  627  801  323  455   82  797  788  756
+ 934  398  982  432  999  658  826  242  647  841
+ 448   98  980  530  360  268  154   62  136  553
+
+BST build comparisons : 619
+BST height            : 12
+
+=== Search keys (50) ===
+ 459  927  326  946  633  804  391  256  202  372
+ 379  200   29  204  442  366   44  580  372  540
+ 369   41  792  899  401   60   52  154  887  524
+ 707  345  450  723  290  773  527  681  720  419
+ 743   98  619  462  302  751  519   36  331  891
+
+Search Key : 459
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 10
+
+Search Key : 927
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 5
+
+Search Key : 326
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 946
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 7
+
+Search Key : 633
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 804
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 11
+
+Search Key : 391
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 256
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 12
+
+Search Key : 202
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 11
+
+Search Key : 372
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 379
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 200
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 11
+
+Search Key : 29
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 6
+
+Search Key : 204
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 11
+
+Search Key : 442
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 366
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 44
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 580
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 7
+
+Search Key : 372
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 540
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 369
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 41
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 7
+
+Search Key : 792
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 899
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 401
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 60
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 52
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 154
+Sequential Search
+  Result      : Found
+  Comparisons : 97
+BST Search
+  Result      : Found
+  Comparisons : 11
+
+Search Key : 887
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 10
+
+Search Key : 524
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 707
+Sequential Search
+  Result      : Found
+  Comparisons : 70
+BST Search
+  Result      : Found
+  Comparisons : 8
+
+Search Key : 345
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 450
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 723
+Sequential Search
+  Result      : Found
+  Comparisons : 40
+BST Search
+  Result      : Found
+  Comparisons : 6
+
+Search Key : 290
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 773
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 527
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 681
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 720
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 419
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 7
+
+Search Key : 743
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 98
+Sequential Search
+  Result      : Found
+  Comparisons : 92
+BST Search
+  Result      : Found
+  Comparisons : 9
+
+Search Key : 619
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 7
+
+Search Key : 462
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 10
+
+Search Key : 302
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 751
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 519
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 9
+
+Search Key : 36
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 6
+
+Search Key : 331
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 8
+
+Search Key : 891
+Sequential Search
+  Result      : Not Found
+  Comparisons : 100
+BST Search
+  Result      : Not Found
+  Comparisons : 10
+
+Number of searches: 50 (found 4, not found 46)
+
+Sequential Search
+  Total comparisons   : 4899
+  Average comparisons : 97.98
+
+BST Search
+  Total comparisons   : 427
+  Average comparisons : 8.54
+
+BST build + search total : 1046
+Sequential total         : 4899
+Break-even searches (approx) : 6.9
