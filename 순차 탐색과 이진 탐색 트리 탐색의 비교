@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define N 100
+#define M 50
+#define MAXV 1000
+
+typedef struct Node { int data; struct Node *left, *right; } Node;
+
+static long build_cmp = 0;
+
+Node *new_node(int v){
+    Node *n = (Node*)malloc(sizeof(Node));
+    n->data = v; n->left = n->right = NULL;
+    return n;
+}
+
+Node *insert(Node *root, int v){
+    if(!root) return new_node(v);
+    Node *cur = root;
+    while(1){
+        build_cmp++;                      /* 삽입 시 비교 1회 */
+        if(v < cur->data){
+            if(!cur->left){ cur->left = new_node(v); break; }
+            cur = cur->left;
+        } else {
+            if(!cur->right){ cur->right = new_node(v); break; }
+            cur = cur->right;
+        }
+    }
+    return root;
+}
+
+int seq_search(int *a, int n, int key, int *found){
+    int c = 0;
+    for(int i = 0; i < n; i++){
+        c++;
+        if(a[i] == key){ *found = 1; return c; }
+    }
+    *found = 0;
+    return c;
+}
+
+/* 노드당 비교 1회로 계산 (==, <, > 3분기를 하나의 비교로 간주) */
+int bst_search(Node *root, int key, int *found){
+    int c = 0;
+    Node *cur = root;
+    while(cur){
+        c++;
+        if(key == cur->data){ *found = 1; return c; }
+        cur = (key < cur->data) ? cur->left : cur->right;
+    }
+    *found = 0;
+    return c;
+}
+
+int height(Node *n){
+    if(!n) return 0;
+    int l = height(n->left), r = height(n->right);
+    return 1 + (l > r ? l : r);
+}
+
+void free_tree(Node *n){
+    if(!n) return;
+    free_tree(n->left); free_tree(n->right); free(n);
+}
+
+int main(void){
+    int arr[N], used[MAXV+1] = {0};
+    srand((unsigned)time(NULL));
+
+    Node *root = NULL;
+    for(int i = 0; i < N; ){
+        int v = rand() % (MAXV+1);
+        if(used[v]) continue;           /* 중복이면 재생성 */
+        used[v] = 1;
+        arr[i++] = v;
+    }
+    for(int i = 0; i < N; i++) root = insert(root, arr[i]);
+
+    printf("=== Generated %d distinct integers ===\n", N);
+    for(int i = 0; i < N; i++) printf("%4d%s", arr[i], (i%10==9)?"\n":" ");
+
+    printf("\nBST build comparisons : %ld\n", build_cmp);
+    printf("BST height            : %d\n", height(root));
+
+    int keys[M];
+    for(int i = 0; i < M; i++) keys[i] = rand() % (MAXV+1);
+
+    printf("\n=== Search keys (%d) ===\n", M);
+    for(int i = 0; i < M; i++) printf("%4d%s", keys[i], (i%10==9)?"\n":" ");
+
+    long st = 0, bt = 0; int sf = 0;
+    for(int i = 0; i < M; i++){
+        int f1, f2;
+        int c1 = seq_search(arr, N, keys[i], &f1);
+        int c2 = bst_search(root, keys[i], &f2);
+        st += c1; bt += c2; if(f1) sf++;
+        printf("\nSearch Key : %d\n", keys[i]);
+        printf("Sequential Search\n  Result      : %s\n  Comparisons : %d\n", f1?"Found":"Not Found", c1);
+        printf("BST Search\n  Result      : %s\n  Comparisons : %d\n", f2?"Found":"Not Found", c2);
+    }
+
+    printf("\nNumber of searches: %d (found %d, not found %d)\n", M, sf, M-sf);
+    printf("\nSequential Search\n  Total comparisons   : %ld\n  Average comparisons : %.2f\n", st, (double)st/M);
+    printf("\nBST Search\n  Total comparisons   : %ld\n  Average comparisons : %.2f\n", bt, (double)bt/M);
+    printf("\nBST build + search total : %ld\n", build_cmp + bt);
+    printf("Sequential total         : %ld\n", st);
+    printf("Break-even searches (approx) : ");
+    double diff = ((double)st - bt)/M;
+    if(diff > 0) printf("%.1f\n", build_cmp / diff); else printf("N/A\n");
+
+    free_tree(root);
+    return 0;
+}
