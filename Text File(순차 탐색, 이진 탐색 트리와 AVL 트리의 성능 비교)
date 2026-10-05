@@ -1,0 +1,753 @@
+Seed : 2026
+
+=== Generated 100 integers ===
+  76  778  783  978  241  784  639  391  134  442
+ 176  921  231  476  671   74  223  952  966  263
+ 870  220  953  481  709  939  228  686  154  754
+ 389  231  221  863  208  153  646  537  544  470
+ 980  720   80  210  886  441  284  799  392  249
+ 752  262  470  394  433  178  332  662  554  487
+ 105  634  408  327  186  616  480  522  153  714
+ 992  132  433  762   32    8  202  316  808  285
+ 565  559  237  725  954  670  903  285   21  147
+ 462  127  471  870  454  657  486  934  178  329
+
+Stored values (distinct) : 93
+Duplicates not inserted  : 7
+
+Construction
+Array comparisons : 4569
+BST comparisons   : 694
+AVL comparisons   : 537
+
+Structure
+Array length : 93
+BST height   : 15
+AVL height   : 8
+AVL balanced check : OK
+
+=== Search keys (50) ===
+ 647  860  151  770  621  183  778  513  499  275
+ 488  754  835  725  479  478   85   71  763  106
+ 909  916  924  379  785  377  726  270    0  904
+ 289  337  763  130  797   73  313  265  277  502
+ 230  765  947   64  180  115  542  956  186  996
+
+Search Key : 647
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 860
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 10
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 151
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 770
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 621
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 13
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 183
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 11
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 778
+
+Sequential Search
+Result      : Found
+Comparisons : 2
+
+BST Search
+Result      : Found
+Comparisons : 2
+
+AVL Search
+Result      : Found
+Comparisons : 4
+
+Search Key : 513
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 11
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 499
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 11
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 275
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 488
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 11
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 754
+
+Sequential Search
+Result      : Found
+Comparisons : 30
+
+BST Search
+Result      : Found
+Comparisons : 7
+
+AVL Search
+Result      : Found
+Comparisons : 5
+
+Search Key : 835
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 10
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 725
+
+Sequential Search
+Result      : Found
+Comparisons : 80
+
+BST Search
+Result      : Found
+Comparisons : 10
+
+AVL Search
+Result      : Found
+Comparisons : 7
+
+Search Key : 479
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 478
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 85
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 6
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 71
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 3
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 763
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 106
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 909
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 916
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 924
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 379
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 785
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 377
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 726
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 10
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 270
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 0
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 4
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 904
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 289
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 12
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 337
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 763
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 130
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 797
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 9
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 73
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 3
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 313
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 12
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 265
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 277
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 502
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 11
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 230
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 765
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 947
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 5
+
+Search Key : 64
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 3
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 180
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 11
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 115
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 8
+
+AVL Search
+Result      : Not Found
+Comparisons : 8
+
+Search Key : 542
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 10
+
+AVL Search
+Result      : Not Found
+Comparisons : 7
+
+Search Key : 956
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 10
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Search Key : 186
+
+Sequential Search
+Result      : Found
+Comparisons : 63
+
+BST Search
+Result      : Found
+Comparisons : 11
+
+AVL Search
+Result      : Found
+Comparisons : 6
+
+Search Key : 996
+
+Sequential Search
+Result      : Not Found
+Comparisons : 93
+
+BST Search
+Result      : Not Found
+Comparisons : 6
+
+AVL Search
+Result      : Not Found
+Comparisons : 6
+
+Searches : 50 (found 4, not found 46)
+
+Sequential Search
+Total comparisons   : 4453
+Average comparisons : 89.06
+
+BST Search
+Total comparisons   : 427
+Average comparisons : 8.54
+
+AVL Search
+Total comparisons   : 337
+Average comparisons : 6.74
+
+Construction + search total
+Array : 9022
+BST   : 1121
+AVL   : 874
