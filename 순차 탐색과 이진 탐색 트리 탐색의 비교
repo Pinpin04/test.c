@@ -20,7 +20,7 @@ Node *insert(Node *root, int v){
     if(!root) return new_node(v);
     Node *cur = root;
     while(1){
-        build_cmp++;                      /* 삽입 시 비교 1회 */
+        build_cmp++;                     
         if(v < cur->data){
             if(!cur->left){ cur->left = new_node(v); break; }
             cur = cur->left;
@@ -73,7 +73,7 @@ int main(void){
     Node *root = NULL;
     for(int i = 0; i < N; ){
         int v = rand() % (MAXV+1);
-        if(used[v]) continue;           /* 중복이면 재생성 */
+        if(used[v]) continue;           
         used[v] = 1;
         arr[i++] = v;
     }
