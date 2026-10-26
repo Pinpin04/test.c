@@ -1,0 +1,131 @@
+Data Count : 10000
+
+Random Data
+Number of Trials : 100
+
+Selection Sort
+Total Comparisons   : 4999500000
+Average Comparisons : 49995000.00
+Average Movements   : 29970.78
+
+Bubble Sort
+Total Comparisons   : 4999500000
+Average Comparisons : 49995000.00
+Average Movements   : 74994665.31
+
+Bubble Sort (Early Termination)
+Total Comparisons   : 4998512179
+Average Comparisons : 49985121.79
+Average Movements   : 74994665.31
+
+Insertion Sort
+Total Comparisons   : 2500821215
+Average Comparisons : 25008212.15
+Average Movements   : 25018219.77
+
+Insertion Sort (>=)
+Total Comparisons   : 2500826221
+Average Comparisons : 25008262.21
+Average Movements   : 25018269.84
+
+All random results sorted correctly : YES
+Bubble - Early Termination avg comparison difference : 9878.21
+
+------------------------------------
+
+Sorted Data
+
+Selection Sort
+Comparisons : 49995000
+Movements   : 0
+Sorted OK   : YES
+
+Bubble Sort
+Comparisons : 49995000
+Movements   : 0
+Sorted OK   : YES
+
+Bubble Sort (Early Termination)
+Comparisons : 9999
+Movements   : 0
+Sorted OK   : YES
+
+Insertion Sort
+Comparisons : 9999
+Movements   : 19998
+Sorted OK   : YES
+
+Insertion Sort (>=)
+Comparisons : 10054
+Movements   : 20053
+Sorted OK   : YES
+
+
+------------------------------------
+
+Reverse-Sorted Data
+
+Selection Sort
+Comparisons : 49995000
+Movements   : 15072
+Sorted OK   : YES
+
+Bubble Sort
+Comparisons : 49995000
+Movements   : 149984835
+Sorted OK   : YES
+
+Bubble Sort (Early Termination)
+Comparisons : 49995000
+Movements   : 149984835
+Sorted OK   : YES
+
+Insertion Sort
+Comparisons : 49995000
+Movements   : 50014943
+Sorted OK   : YES
+
+Insertion Sort (>=)
+Comparisons : 49995000
+Movements   : 50014998
+Sorted OK   : YES
+
+
+------------------------------------
+
+Partially Sorted Data (500 random swaps)
+
+Selection Sort
+Comparisons : 49995000
+Movements   : 1506
+Sorted OK   : YES
+
+Bubble Sort
+Comparisons : 49995000
+Movements   : 9405258
+Sorted OK   : YES
+
+Bubble Sort (Early Termination)
+Comparisons : 49728915
+Movements   : 9405258
+Sorted OK   : YES
+
+Insertion Sort
+Comparisons : 3145085
+Movements   : 3155084
+Sorted OK   : YES
+
+Insertion Sort (>=)
+Comparisons : 3145140
+Movements   : 3155139
+Sorted OK   : YES
+
+------------------------------------
+
+Stability Verification
+
+Selection Sort       : NOT STABLE (example: (125,300)(527,200)(527,100)(892,400), dup-test order violations = 3245, sorted=YES)
+Bubble Sort          : STABLE (example: (125,300)(527,100)(527,200)(892,400), dup-test order violations = 0, sorted=YES)
+Insertion Sort       : STABLE (example: (125,300)(527,100)(527,200)(892,400), dup-test order violations = 0, sorted=YES)
+Insertion Sort (>=)  : NOT STABLE (example: (125,300)(527,200)(527,100)(892,400), dup-test order violations = 9900, sorted=YES)
+Bubble (Early)       : STABLE (violations = 0)
