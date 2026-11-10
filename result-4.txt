@@ -1,0 +1,61 @@
+Data Size : 1000
+
+Algorithm       Comparisons    Time(ms)     Memory(Bytes)
+--------------------------------------------------------
+Merge Sort      8720           0.0496       4280
+Quick (First)   11939          0.0340       540
+Quick (Random)  11123          0.0348       400
+Quick (Median3) 10945          0.0394       320
+Sorted check : OK, OK, OK, OK
+
+Data Size : 2000
+
+Algorithm       Comparisons    Time(ms)     Memory(Bytes)
+--------------------------------------------------------
+Merge Sort      19415          0.1289       8308
+Quick (First)   26335          0.0892       480
+Quick (Random)  22924          0.1047       440
+Quick (Median3) 25042          0.0842       420
+Sorted check : OK, OK, OK, OK
+
+Data Size : 4000
+
+Algorithm       Comparisons    Time(ms)     Memory(Bytes)
+--------------------------------------------------------
+Merge Sort      42843          0.3375       16336
+Quick (First)   61068          0.2301       600
+Quick (Random)  54888          0.2669       520
+Quick (Median3) 53162          0.2434       400
+Sorted check : OK, OK, OK, OK
+
+Data Size : 8000
+
+Algorithm       Comparisons    Time(ms)     Memory(Bytes)
+--------------------------------------------------------
+Merge Sort      93650          0.6654       32364
+Quick (First)   128201         0.4665       600
+Quick (Random)  123635         0.5145       640
+Quick (Median3) 125229         0.4197       480
+Sorted check : OK, OK, OK, OK
+
+Data Size : 16000
+
+Algorithm       Comparisons    Time(ms)     Memory(Bytes)
+--------------------------------------------------------
+Merge Sort      203239         1.2577       64392
+Quick (First)   265956         0.9160       640
+Quick (Random)  292194         0.9418       680
+Quick (Median3) 267179         0.9364       540
+Sorted check : OK, OK, OK, OK
+
+Data Size : 20000
+
+Algorithm       Comparisons    Time(ms)     Memory(Bytes)
+--------------------------------------------------------
+Merge Sort      260948         1.8203       80420
+Quick (First)   369711         1.3107       660
+Quick (Random)  345679         1.2819       620
+Quick (Median3) 323027         1.2884       500
+Sorted check : OK, OK, OK, OK
+
+Overall verification : ALL OK
