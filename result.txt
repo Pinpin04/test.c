@@ -1,67 +1,117 @@
-Data Size : 1000
+Pivot: Median-of-Three, Time: average of 20 runs (clock())
 
-Algorithm       Comparisons    Time(ms)     Memory(Bytes)
---------------------------------------------------------
-Heap Sort       16788          0.0422       44
-Merge Sort      8704           0.0483       4280
-Quick (First)   10787          0.0236       520
-Quick (Random)  10518          0.0275       400
-Quick (Median3) 10860          0.0205       300
-Sorted check : OK, OK, OK, OK, OK
+Data Size : 1000
+Operations: 200
+
+                  Quick Sort      AVL Tree
+------------------------------------------------
+Total Time        0.1027 ms       0.1405 ms
+Comparisons       109531          16027
+Data Movements    79057           1100
+Memory Usage      4420 Bytes      35392 Bytes
+
+Final Data Count  1105            1105
+
+[Detail] insert 105, delete 95 (found 0, not found 95)
+  Sort phase    cmp  : 10860          12990
+  Sort phase    move : 18813          996
+  Ins/Del phase cmp  : 98671          3037
+  Ins/Del phase move : 60244          104
+  Check: sorted(Quick)=OK, inorder(AVL)=OK, same data=OK
 
 Data Size : 2000
+Operations: 400
 
-Algorithm       Comparisons    Time(ms)     Memory(Bytes)
---------------------------------------------------------
-Heap Sort       37744          0.0504       44
-Merge Sort      19388          0.0647       8308
-Quick (First)   24224          0.0532       520
-Quick (Random)  24254          0.0740       460
-Quick (Median3) 23110          0.0707       320
-Sorted check : OK, OK, OK, OK, OK
+                  Quick Sort      AVL Tree
+------------------------------------------------
+Total Time        0.2879 ms       0.2618 ms
+Comparisons       411509          35646
+Data Movements    277773          2191
+Memory Usage      8840 Bytes      70224 Bytes
+
+Final Data Count  2210            2210
+
+[Detail] insert 212, delete 188 (found 2, not found 186)
+  Sort phase    cmp  : 23110          28978
+  Sort phase    move : 36937          1981
+  Ins/Del phase cmp  : 388399         6668
+  Ins/Del phase move : 240836         210
+  Check: sorted(Quick)=OK, inorder(AVL)=OK, same data=OK
 
 Data Size : 4000
+Operations: 800
 
-Algorithm       Comparisons    Time(ms)     Memory(Bytes)
---------------------------------------------------------
-Heap Sort       83496          0.1157       44
-Merge Sort      42817          0.1894       16336
-Quick (First)   55596          0.1979       520
-Quick (Random)  56194          0.2013       540
-Quick (Median3) 51727          0.1793       380
-Sorted check : OK, OK, OK, OK, OK
+                  Quick Sort      AVL Tree
+------------------------------------------------
+Total Time        0.9691 ms       0.5230 ms
+Comparisons       1662145         78182
+Data Movements    1019307         4324
+Memory Usage      17612 Bytes     137984 Bytes
+
+Final Data Count  4403            4403
+
+[Detail] insert 416, delete 384 (found 13, not found 371)
+  Sort phase    cmp  : 51727          63720
+  Sort phase    move : 87480          3920
+  Ins/Del phase cmp  : 1610418        14462
+  Ins/Del phase move : 931827         404
+  Check: sorted(Quick)=OK, inorder(AVL)=OK, same data=OK
 
 Data Size : 8000
+Operations: 1600
 
-Algorithm       Comparisons    Time(ms)     Memory(Bytes)
---------------------------------------------------------
-Heap Sort       182977         0.2474       44
-Merge Sort      93584          0.3419       32364
-Quick (First)   121944         0.2721       540
-Quick (Random)  121890         0.3291       620
-Quick (Median3) 111248         0.2601       460
-Sorted check : OK, OK, OK, OK, OK
+                  Quick Sort      AVL Tree
+------------------------------------------------
+Total Time        2.3187 ms       0.7181 ms
+Comparisons       6750159         170854
+Data Movements    4010030         8479
+Memory Usage      34980 Bytes     267920 Bytes
+
+Final Data Count  8744            8744
+
+[Detail] insert 820, delete 780 (found 76, not found 704)
+  Sort phase    cmp  : 111248         139377
+  Sort phase    move : 182469         7693
+  Ins/Del phase cmp  : 6638911        31477
+  Ins/Del phase move : 3827561        786
+  Check: sorted(Quick)=OK, inorder(AVL)=OK, same data=OK
 
 Data Size : 16000
+Operations: 3200
 
-Algorithm       Comparisons    Time(ms)     Memory(Bytes)
---------------------------------------------------------
-Heap Sort       397684         0.3509       44
-Merge Sort      203197         0.5138       64392
-Quick (First)   254823         0.4736       640
-Quick (Random)  267303         0.4994       580
-Quick (Median3) 249643         0.4562       500
-Sorted check : OK, OK, OK, OK, OK
+                  Quick Sort      AVL Tree
+------------------------------------------------
+Total Time        7.0955 ms       1.3567 ms
+Comparisons       26793814        369012
+Data Movements    16360879        16255
+Memory Usage      69380 Bytes     509008 Bytes
+
+Final Data Count  17344           17344
+
+[Detail] insert 1615, delete 1585 (found 271, not found 1314)
+  Sort phase    cmp  : 249643         301864
+  Sort phase    move : 418213         14777
+  Ins/Del phase cmp  : 26544171       67148
+  Ins/Del phase move : 15942666       1478
+  Check: sorted(Quick)=OK, inorder(AVL)=OK, same data=OK
 
 Data Size : 20000
+Operations: 4000
 
-Algorithm       Comparisons    Time(ms)     Memory(Bytes)
---------------------------------------------------------
-Heap Sort       510852         0.3606       44
-Merge Sort      260816         0.5524       80420
-Quick (First)   324805         0.5482       640
-Quick (Random)  345389         0.6189       640
-Quick (Median3) 316162         0.6153       500
-Sorted check : OK, OK, OK, OK, OK
+                  Quick Sort      AVL Tree
+------------------------------------------------
+Total Time        11.0826 ms      1.7913 ms
+Comparisons       41871709        471976
+Data Movements    25797467        19958
+Memory Usage      86580 Bytes     623248 Bytes
+
+Final Data Count  21645           21645
+
+[Detail] insert 2031, delete 1969 (found 386, not found 1583)
+  Sort phase    cmp  : 316162         386299
+  Sort phase    move : 491876         18146
+  Ins/Del phase cmp  : 41555547       85677
+  Ins/Del phase move : 25305591       1812
+  Check: sorted(Quick)=OK, inorder(AVL)=OK, same data=OK
 
 Overall verification : ALL OK
